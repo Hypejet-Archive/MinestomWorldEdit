@@ -1,0 +1,13 @@
+{
+   "schematic":"special/start/start_center.schem",
+   "generation_weight":1,
+   "generation_width":"1",
+   "generation_length":"1",
+   "edge_schematics": {
+       "open": "special/start/start_open.schem",
+	   "closed": "special/start/start_closed.schem"
+   },
+   "name": "start",
+   "custom_entities":[],
+   "loot":[]
+}

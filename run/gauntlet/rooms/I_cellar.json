@@ -1,0 +1,61 @@
+{
+  "schematic": "corridor_I/cellar.schem",
+  "generation_weight": 1.0,
+  "generation_width": 1,
+  "generation_length": 1,
+  "type": "I",
+  "name": "cellar",
+  "custom_entities": [],
+  "loot": [
+    {
+      "position": {
+        "x": 6,
+        "y": 44,
+        "z": 14
+      },
+      "blockdata": "minecraft:barrel[facing\u003dnorth,open\u003dfalse]",
+      "spawn_chance": 100.0,
+      "tier": 1
+    }
+  ],
+  "secrethints": [
+    {
+      "x": 2,
+      "y": 49,
+      "z": 7
+    },
+    {
+      "x": 3,
+      "y": 47,
+      "z": 6
+    },
+    {
+      "x": 4,
+      "y": 45,
+      "z": 5
+    },
+    {
+      "x": 7,
+      "y": 45,
+      "z": 5
+    },
+    {
+      "x": 7,
+      "y": 44,
+      "z": 7
+    },
+    {
+      "x": 8,
+      "y": 43,
+      "z": 10
+    },
+    {
+      "x": 7,
+      "y": 43,
+      "z": 12
+    }
+  ],
+  "allow_in_dungeon": false,
+  "authorized_builders": [],
+  "shouldSave": true
+}

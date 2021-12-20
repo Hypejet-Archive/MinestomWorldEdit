@@ -1,0 +1,27 @@
+{
+  "schematic": "rooms/I/zombie_fight_1.schem",
+  "generation_weight": 1.0,
+  "generation_width": 1,
+  "generation_length": 1,
+  "type": "I",
+  "name": "zombie_fight_1",
+  "custom_entities": [
+    {
+      "id": "zombie",
+      "position": {
+        "x": 8,
+        "y": 50,
+        "z": 8
+      },
+      "rotation_yaw": 0.0
+    }
+  ],
+  "loot": [],
+  "secrethints": [],
+  "scripts": {},
+  "allow_in_dungeon": true,
+  "authorized_builders": [
+    "d0e05de7-6067-454d-beae-c6d19d886191"
+  ],
+  "shouldSave": true
+}

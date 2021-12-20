@@ -1,0 +1,18 @@
+{
+  "schematic": "rooms/T/nether.schem",
+  "generation_weight": 1.0,
+  "generation_width": 1,
+  "generation_length": 1,
+  "type": "T",
+  "name": "nether",
+  "custom_entities": [],
+  "loot": [],
+  "secrethints": [],
+  "allow_in_dungeon": true,
+  "authorized_builders": [
+    "d0e05de7-6067-454d-beae-c6d19d886191",
+    "d0e05de7-6067-454d-beae-c6d19d886191",
+    "d0e05de7-6067-454d-beae-c6d19d886191"
+  ],
+  "shouldSave": true
+}

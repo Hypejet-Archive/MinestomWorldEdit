@@ -1,0 +1,1 @@
+{"cfbf6fd5-7ce9-4fca-9d2b-a1fc7f9a8c21":{"attributes":{"name":"Builder","priority":"0","parent":"","chatprefix":"","tabprefix":""},"permissions":{"gauntlet":{"builder":{"editroom":true}}}},"d5630c0f-60a4-4d2a-ae28-dab34849d5b8":{"attributes":{"name":"Admin","priority":"1000","parent":"","chatprefix":"[Admin] ","tabprefix":""},"permissions":{"gauntlet":true,"permissions":true}}}
