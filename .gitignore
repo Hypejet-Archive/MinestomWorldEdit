@@ -1,0 +1,6 @@
+/gradle
+/.mixin.out
+/build
+/DataGeneration
+/extensions
+/run/**
