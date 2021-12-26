@@ -5,6 +5,7 @@ import com.sk89q.worldedit.blocks.BaseItemStack;
 import com.sk89q.worldedit.entity.BaseEntity;
 import com.sk89q.worldedit.extension.platform.AbstractPlayerActor;
 import com.sk89q.worldedit.extent.inventory.BlockBag;
+import com.sk89q.worldedit.math.Vector3;
 import com.sk89q.worldedit.session.SessionKey;
 import com.sk89q.worldedit.util.HandSide;
 import com.sk89q.worldedit.util.Location;
@@ -18,6 +19,7 @@ import io.github.openminigameserver.worldedit.platform.MinestomPlatform;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomAdapter;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomPermissionProvider;
 import io.github.openminigameserver.worldedit.platform.misc.SessionKeyImpl;
+import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,6 +50,19 @@ public final class MinestomPlayer extends AbstractPlayerActor {
 
     public boolean hasPermission(@NotNull String permission) {
         return MinestomPermissionProvider.hasPermission(this.player, permission);
+    }
+
+    @Override
+    public boolean trySetPosition(Vector3 pos) {
+        Pos oldPos = player.getPosition();
+        player.teleport(new Pos(pos.getX(), pos.getY(), pos.getZ(), oldPos.yaw(), oldPos.pitch()));
+        return true;
+    }
+
+    @Override
+    public boolean trySetPosition(Vector3 pos, float pitch, float yaw) {
+        player.teleport(new Pos(pos.getX(), pos.getY(), pos.getZ(), yaw, pitch));
+        return true;
     }
 
     @NotNull

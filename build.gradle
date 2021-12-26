@@ -23,7 +23,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 compileJava   {
-	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
+	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {

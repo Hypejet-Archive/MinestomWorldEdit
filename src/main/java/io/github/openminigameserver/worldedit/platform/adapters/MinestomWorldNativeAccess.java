@@ -58,10 +58,8 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
             }
 
             // Set the block
-            getWorld().setBlock(
-                    chunk.getChunkX()*16 + position.blockX(),
-                    position.blockY(),
-                    chunk.getChunkZ()*16 + position.blockZ(), Block.fromStateId(state));
+            chunk.setBlock(position.blockX(), position.blockY(), position.blockZ(), Block.fromStateId(state));
+            chunk.sendPacketToViewers(new BlockChangePacket(position, state));
         }
 
         return state;

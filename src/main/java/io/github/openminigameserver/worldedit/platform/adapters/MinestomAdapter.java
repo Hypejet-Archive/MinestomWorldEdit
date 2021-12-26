@@ -79,7 +79,7 @@ public final class MinestomAdapter {
     @NotNull
     public Tag asTag(@NotNull NBT nbt) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try(NBTWriter writer = new NBTWriter(baos, false)) {
+        try(NBTWriter writer = new NBTWriter(baos)) {
             writer.writeNamed("value", nbt);
         }
         try(NBTInputStream nbtis = new NBTInputStream(new ByteArrayInputStream(baos.toByteArray()))) {
@@ -94,7 +94,7 @@ public final class MinestomAdapter {
             nbtos.writeNamedTag("value", nbt);
         }
 
-        try(NBTReader reader = new NBTReader(new ByteArrayInputStream(baos.toByteArray()), false)) {
+        try(NBTReader reader = new NBTReader(new ByteArrayInputStream(baos.toByteArray()))) {
             return reader.read();
         }
     }
