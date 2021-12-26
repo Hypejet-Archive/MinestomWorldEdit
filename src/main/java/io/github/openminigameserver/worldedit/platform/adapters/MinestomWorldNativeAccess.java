@@ -15,13 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.ref.WeakReference;
 
 public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk, Short, Vec> {
-    //private Batch currentBlockBatch;
     private final WeakReference<Instance> worldRef;
-    //private final boolean useBlockBatch;
-
-    /*private final BlockBatch newBlockBatch() {
-        return !this.useBlockBatch ? null : this.getWorld()..createBlockBatch();
-    }*/
 
     private final Instance getWorld() {
         Instance instance = this.worldRef.get();

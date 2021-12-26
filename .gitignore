@@ -1,6 +1,7 @@
-/gradle
-/.mixin.out
-/build
-/DataGeneration
-/extensions
-/run/**
+gradle
+.mixin.out
+.idea
+build
+DataGeneration
+extensions
+run/**

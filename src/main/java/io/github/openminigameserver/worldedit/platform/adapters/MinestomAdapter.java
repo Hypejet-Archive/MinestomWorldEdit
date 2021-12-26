@@ -20,6 +20,7 @@ import io.github.openminigameserver.worldedit.platform.actors.MinestomConsole;
 import net.kyori.adventure.text.Component;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.CommandSender;
+import net.minestom.server.coordinate.Point;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.entity.Player;
@@ -35,9 +36,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public final class MinestomAdapter {
-    @NotNull
     public static MinestomPlatform platform;
-    public static Gson worleditGson = GsonComponentSerializer.populate(new GsonBuilder()).create();
     public static final MinestomAdapter INSTANCE = new MinestomAdapter();
 
     private MinestomAdapter() {
@@ -69,6 +68,10 @@ public final class MinestomAdapter {
     @NotNull
     public Location asLocation(@NotNull World world, @NotNull Pos position) {
         return new Location(world, position.blockX(), position.blockY(), position.blockZ(), position.yaw(), position.pitch());
+    }
+
+    public Location asLocation(@NotNull World world, @NotNull Point position) {
+        return new Location(world, position.blockX(), position.blockY(), position.blockZ(), 0, 0);
     }
 
     @NotNull

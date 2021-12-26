@@ -42,8 +42,7 @@ public class WorldEditCommand extends Command {
 
     @Override
     public void globalListener(@NotNull CommandSender sender, @NotNull CommandContext context, @NotNull String command) {
-        if(sender.isPlayer()) {
-            Player player = sender.asPlayer();
+        if(sender instanceof Player player) {
             if(player.getInstance() != null) {
                 player.getInstance().scheduleNextTick((instance) -> {
                     CommandEvent event = new CommandEvent(MinestomAdapter.INSTANCE.asActor(sender),

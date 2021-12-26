@@ -10,6 +10,7 @@ import com.sk89q.worldedit.util.SideEffect;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldedit.world.registry.Registries;
 import io.github.openminigameserver.worldedit.MinestomWorldEdit;
+import io.github.openminigameserver.worldedit.WorldEditListener;
 import io.github.openminigameserver.worldedit.platform.actors.MinestomPlayer;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomWorld;
 import io.github.openminigameserver.worldedit.platform.misc.WorldEditCommand;
@@ -39,12 +40,16 @@ public class MinestomPlatform extends AbstractPlatform implements MultiUserPlatf
         this.minestomWorldEdit = minestomWorldEdit;
     }
 
-    public World getWorld(Instance instance) {
+    public MinestomWorld getWorld(Instance instance) {
         return new MinestomWorld(instance);
     }
 
-    public Actor getPlayer(Player player) {
+    public MinestomPlayer getPlayer(Player player) {
         return playerMap.computeIfAbsent(player.getUuid(), k -> new MinestomPlayer(this, player));
+    }
+
+    public void removePlayer(UUID uuid) {
+        playerMap.remove(uuid);
     }
 
     @Override
@@ -66,7 +71,7 @@ public class MinestomPlatform extends AbstractPlatform implements MultiUserPlatf
 
     @Override
     public int getDataVersion() {
-        return Constants.DATA_VERSION_MC_1_17;
+        return Constants.DATA_VERSION_MC_1_18;
     }
 
     @Override
@@ -98,12 +103,7 @@ public class MinestomPlatform extends AbstractPlatform implements MultiUserPlatf
         GlobalEventHandler handler = MinecraftServer.getGlobalEventHandler();
         WorldEdit we = WorldEdit.getInstance();
 
-        handler.addEventCallback(PlayerDisconnectEvent.class, (event) -> {
-            playerMap.remove(event.getPlayer().getUuid());
-        });
-
-        handleRightClickEvent(handler, we);
-        handleLeftClickEvent(handler, we);
+        WorldEditListener.register(minestomWorldEdit.getEventNode(), this, we);
     }
 
     private void handleLeftClickEvent(GlobalEventHandler handler, WorldEdit we) {

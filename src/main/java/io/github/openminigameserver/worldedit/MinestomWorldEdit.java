@@ -60,7 +60,6 @@ public class MinestomWorldEdit extends Extension {
 
         registerBlocks();
         registerItems();
-
     }
 
     private void loadConfig() {

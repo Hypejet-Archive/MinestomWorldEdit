@@ -8,15 +8,19 @@ import com.sk89q.worldedit.registry.state.IntegerProperty;
 import com.sk89q.worldedit.registry.state.Property;
 import com.sk89q.worldedit.world.block.BlockState;
 import com.sk89q.worldedit.world.block.BlockType;
+import com.sk89q.worldedit.world.registry.BlockMaterial;
 import com.sk89q.worldedit.world.registry.BundledBlockRegistry;
+import com.sk89q.worldedit.world.registry.PassthroughBlockMaterial;
 import net.minestom.server.instance.block.Block;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.Map.Entry;
 
 public final class MinestomBlockRegistry extends BundledBlockRegistry {
     private static final Map<String, Block> blockMap = new HashMap<>();
+    private static final Map<String, BlockMaterial> blockMaterialMap = new HashMap<>();
     private static final Map<String, List<Block>> blockAlternativesMap = new HashMap<>();
     public static final MinestomBlockRegistry INSTANCE = new MinestomBlockRegistry();
 
@@ -34,6 +38,40 @@ public final class MinestomBlockRegistry extends BundledBlockRegistry {
                 blockAlternativesMap.computeIfAbsent(block.name(), k->new ArrayList<>())
                         .add(block);
             }
+        }
+    }
+
+    @Nullable
+    @Override
+    public BlockMaterial getMaterial(BlockType blockType) {
+        Block block = blockMap.get(blockType.getId());
+        if (block == null) return null;
+
+        return blockMaterialMap.computeIfAbsent(blockType.getId(),
+                id -> new MinestomBlockMaterial(super.getMaterial(blockType), block));
+    }
+
+    public static class MinestomBlockMaterial extends PassthroughBlockMaterial {
+        private Block minestomBlock;
+
+        public MinestomBlockMaterial(@Nullable BlockMaterial material, Block block) {
+            super(material);
+            this.minestomBlock = block;
+        }
+
+        @Override
+        public boolean isAir() {
+            return minestomBlock.isAir();
+        }
+
+        @Override
+        public boolean isSolid() {
+            return minestomBlock.isSolid();
+        }
+
+        @Override
+        public boolean isLiquid() {
+            return minestomBlock.isLiquid();
         }
     }
 
