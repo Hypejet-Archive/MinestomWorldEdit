@@ -46,12 +46,12 @@ public final class MinestomWorld extends AbstractWorld {
     }
 
     @NotNull
-    public final MinestomWorldNativeAccess getNativeAccess() {
+    public MinestomWorldNativeAccess getNativeAccess() {
         return this.nativeAccess;
     }
 
     @NotNull
-    public final Instance getWorldChecked() throws WorldEditException {
+    public Instance getWorldChecked() throws WorldEditException {
         Instance world = this.worldRef.get();
         if (world != null) {
             return world;

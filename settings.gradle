@@ -2,5 +2,3 @@
 project(':gauntlet').projectDir = new File('../Gauntlet')
 include ':acf-minestom'
 project(':acf-minestom').projectDir = new File('../acf-minestom')*/
-include ':minestom'
-project(':minestom').projectDir = new File('../Minestom')

@@ -1,7 +1,3 @@
-import io.minio.MinioClient
-import io.minio.ObjectWriteArgs
-import io.minio.UploadObjectArgs
-
 buildscript {
 	repositories {
 		jcenter()
@@ -14,7 +10,6 @@ buildscript {
 	dependencies {
 		classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
 		classpath 'com.github.IntellectualSites.FastAsyncWorldEdit:ap:1.16-462'
-		classpath "io.minio:minio:8.3.3"
 	}
 }
 
@@ -39,8 +34,7 @@ repositories {
 }
 
 dependencies {
-	compileOnly project(":minestom")
-	//implementation('com.github.Minestom:Minestom:-SNAPSHOT')
+	implementation('com.github.Minestom:Minestom:-SNAPSHOT')
 	//compileOnly project(":gauntlet")
 
 	//implementation "com.fastasyncworldedit:FAWE-Core:1.17-6"
@@ -52,19 +46,5 @@ shadowJar {
 }
 
 build.dependsOn shadowJar
-
-task uploadWE {
-	doLast {
-		MinioClient minioClient = MinioClient.builder().endpoint("http://51.222.24.246:9000/")
-				.credentials("$System.env.GAUNTLET_MINIO_USER", "$System.env.GAUNTLET_MINIO_KEY")
-				.build();
-		minioClient.uploadObject(UploadObjectArgs.builder()
-				.bucket("gauntletjars")
-				.object("MinestomWorldEdit.jar")
-				.filename("./build/libs/MinestomWorldEdit-all.jar", ObjectWriteArgs.MAX_PART_SIZE)
-				.build())
-	}
-}
-uploadWE.dependsOn build
 
 

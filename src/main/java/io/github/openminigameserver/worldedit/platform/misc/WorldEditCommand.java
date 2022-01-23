@@ -23,7 +23,7 @@ public class WorldEditCommand extends Command {
 
         ArgumentStringArray argument = ArgumentType.StringArray("args");
         argument.setSuggestionCallback((sender, context, suggestion) -> {
-            CommandSuggestionEvent event = new CommandSuggestionEvent(MinestomAdapter.INSTANCE.asActor(sender), context.getInput());
+            CommandSuggestionEvent event = new CommandSuggestionEvent(MinestomAdapter.INSTANCE.asActor(sender), "/"+context.getInput());
             WorldEdit.getInstance().getEventBus().post(event);
 
             int lastSpace = context.getInput().lastIndexOf(" ");
@@ -31,7 +31,7 @@ public class WorldEditCommand extends Command {
                 suggestion.setStart(lastSpace+2);
             }
 
-            List<String> suggests = CommandUtil.fixSuggestions(context.getInput(), event.getSuggestions());
+            List<String> suggests = CommandUtil.fixSuggestions("/"+context.getInput(), event.getSuggestions());
             for(String suggest : suggests) {
                 suggestion.addEntry(new SuggestionEntry(suggest));
             }

@@ -1,5 +1,6 @@
 package io.github.openminigameserver.worldedit;
 
+import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.util.Direction;
 import com.sk89q.worldedit.util.Location;
@@ -16,6 +17,15 @@ public class WorldEditListener {
     public static void register(EventNode<Event> eventNode, MinestomPlatform platform, WorldEdit worldEdit) {
         eventNode.addListener(PlayerDisconnectEvent.class, (event) -> {
             platform.removePlayer(event.getPlayer().getUuid());
+        });
+
+        eventNode.addListener(PlayerPluginMessageEvent.class, (event) -> {
+            if (event.getIdentifier().equals("worldedit:cui")) {
+                com.sk89q.worldedit.entity.Player player = (com.sk89q.worldedit.entity.Player) MinestomAdapter.INSTANCE.asActor(event.getPlayer());
+
+                LocalSession session = worldEdit.getSessionManager().get(player);
+                session.handleCUIInitializationMessage(event.getMessageString(), player);
+            }
         });
 
         eventNode.addListener(PlayerBlockInteractEvent.class, (event) -> {

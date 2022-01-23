@@ -1,10 +1,12 @@
 // MinestomPlayer.java
 package io.github.openminigameserver.worldedit.platform.actors;
 
+import com.sk89q.util.StringUtil;
 import com.sk89q.worldedit.blocks.BaseItemStack;
 import com.sk89q.worldedit.entity.BaseEntity;
 import com.sk89q.worldedit.extension.platform.AbstractPlayerActor;
 import com.sk89q.worldedit.extent.inventory.BlockBag;
+import com.sk89q.worldedit.internal.cui.CUIEvent;
 import com.sk89q.worldedit.math.Vector3;
 import com.sk89q.worldedit.session.SessionKey;
 import com.sk89q.worldedit.util.HandSide;
@@ -26,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jglrxavpok.hephaistos.nbt.NBTException;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -63,6 +66,16 @@ public final class MinestomPlayer extends AbstractPlayerActor {
     public boolean trySetPosition(Vector3 pos, float pitch, float yaw) {
         player.teleport(new Pos(pos.getX(), pos.getY(), pos.getZ(), yaw, pitch));
         return true;
+    }
+
+    @Override
+    public void dispatchCUIEvent(CUIEvent event) {
+        String[] params = event.getParameters();
+        String send = event.getTypeId();
+        if (params.length > 0) {
+            send = send + "|" + StringUtil.joinString(params, "|");
+        }
+        player.sendPluginMessage("worldedit:cui", send.getBytes(StandardCharsets.UTF_8));
     }
 
     @NotNull

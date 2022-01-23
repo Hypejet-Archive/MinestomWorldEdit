@@ -7,6 +7,7 @@ import com.sk89q.worldedit.world.block.BlockState;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.instance.Instance;
+import net.minestom.server.instance.batch.AbsoluteBlockBatch;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.network.packet.server.play.BlockChangePacket;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +17,8 @@ import java.lang.ref.WeakReference;
 
 public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk, Short, Vec> {
     private final WeakReference<Instance> worldRef;
+    private AbsoluteBlockBatch currentBlockBatch;
+    private final boolean useBlockBatch;
 
     private final Instance getWorld() {
         Instance instance = this.worldRef.get();
@@ -43,8 +46,9 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
     @NotNull
     public Short setBlockState(@NotNull Chunk chunk, @NotNull Vec position, Short state) {
-        if (false) {//this.useBlockBatch && this.currentBlockBatch != null) {
-            //this.currentBlockBatch.setBlockStateId(position.toBlockPosition(), state);
+        if (useBlockBatch) {
+            if (currentBlockBatch == null) currentBlockBatch = new AbsoluteBlockBatch();
+            currentBlockBatch.setBlock(position, Block.fromStateId(state));
         } else {
             // Cannot place block in a read-only chunk
             if (chunk.isReadOnly()) {
@@ -101,19 +105,20 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
     public void onBlockStateChange(@Nullable Vec pos, @Nullable Short oldState, @Nullable Short newState) {
     }
 
-    public final void flush() {
-        //if (this.currentBlockBatch != null) {
-        //    this.currentBlockBatch.flush(() -> {});
-        //}
+    public void flush() {
+        if (this.currentBlockBatch != null) {
+            this.currentBlockBatch.apply(worldRef.get(), () -> {});
+            this.currentBlockBatch = null;
+        }
     }
 
     public final boolean getUseBlockBatch() {
-        return false;//this.useBlockBatch;
+        return this.useBlockBatch;
     }
 
     public MinestomWorldNativeAccess(@NotNull WeakReference worldRef, boolean useBlockBatch) {
         this.worldRef = worldRef;
-        //this.useBlockBatch = useBlockBatch;
-        //this.currentBlockBatch = this.newBlockBatch();
+        this.useBlockBatch = useBlockBatch;
+        this.currentBlockBatch = null;
     }
 }

@@ -1,6 +1,7 @@
 package io.github.openminigameserver.worldedit.platform;
 
 import com.sk89q.worldedit.LocalConfiguration;
+import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.extension.platform.*;
 import com.sk89q.worldedit.internal.Constants;
@@ -21,7 +22,9 @@ import net.minestom.server.event.GlobalEventHandler;
 import net.minestom.server.event.player.PlayerBlockBreakEvent;
 import net.minestom.server.event.player.PlayerBlockInteractEvent;
 import net.minestom.server.event.player.PlayerDisconnectEvent;
+import net.minestom.server.event.player.PlayerPluginMessageEvent;
 import net.minestom.server.instance.Instance;
+import net.minestom.server.network.packet.client.play.ClientPluginMessagePacket;
 import org.enginehub.piston.CommandManager;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -104,32 +107,6 @@ public class MinestomPlatform extends AbstractPlatform implements MultiUserPlatf
         WorldEdit we = WorldEdit.getInstance();
 
         WorldEditListener.register(minestomWorldEdit.getEventNode(), this, we);
-    }
-
-    private void handleLeftClickEvent(GlobalEventHandler handler, WorldEdit we) {
-        handler.addEventCallback(PlayerBlockBreakEvent.class, (event) -> {
-            com.sk89q.worldedit.entity.Player player = (com.sk89q.worldedit.entity.Player) MinestomAdapter.INSTANCE.asActor(event.getPlayer());
-
-            Location location = MinestomAdapter.INSTANCE.asLocation(
-                    MinestomAdapter.INSTANCE.asWorld(event.getPlayer().getInstance()),
-                    new Pos(event.getBlockPosition()));
-            if (we.handleBlockLeftClick(player, location, Direction.UP)) {
-                event.setCancelled(true);
-            }
-        });
-    }
-
-    private void handleRightClickEvent(GlobalEventHandler handler, WorldEdit we) {
-        handler.addEventCallback(PlayerBlockInteractEvent.class, (event) -> {
-            com.sk89q.worldedit.entity.Player player = (com.sk89q.worldedit.entity.Player) MinestomAdapter.INSTANCE.asActor(event.getPlayer());
-
-            Location location = MinestomAdapter.INSTANCE.asLocation(
-                    MinestomAdapter.INSTANCE.asWorld(event.getPlayer().getInstance()),
-                    new Pos(event.getBlockPosition()));
-            if (we.handleBlockRightClick(player, location, Direction.UP)) {
-                event.setCancelled(true);
-            }
-        });
     }
 
     @Override
