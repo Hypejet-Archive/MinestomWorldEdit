@@ -10,6 +10,7 @@ import net.minestom.server.instance.Instance;
 import net.minestom.server.instance.batch.AbsoluteBlockBatch;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.network.packet.server.play.BlockChangePacket;
+import net.minestom.server.utils.chunk.ChunkUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +42,11 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
     @NotNull
     public Short getBlockState(@NotNull Chunk chunk, @NotNull Vec position) {
+        int sectionY = ChunkUtils.getChunkCoordinate(position.blockY());
+        if (sectionY < chunk.getMinSection() || sectionY > chunk.getMaxSection()) {
+            return 0;
+        }
+
         return chunk.getBlock(position.blockX(), position.blockY(), position.blockZ()).stateId();
     }
 
@@ -52,6 +58,11 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
         } else {
             // Cannot place block in a read-only chunk
             if (chunk.isReadOnly()) {
+                return 0;
+            }
+
+            int sectionY = ChunkUtils.getChunkCoordinate(position.blockY());
+            if (sectionY < chunk.getMinSection() || sectionY > chunk.getMaxSection()) {
                 return 0;
             }
 

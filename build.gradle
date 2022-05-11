@@ -34,10 +34,8 @@ repositories {
 }
 
 dependencies {
-	implementation('com.github.Minestom:Minestom:-SNAPSHOT')
-	//compileOnly project(":gauntlet")
-
-	//implementation "com.fastasyncworldedit:FAWE-Core:1.17-6"
+	compileOnly('com.github.Minestom:Minestom:-SNAPSHOT')
+	implementation("com.google.guava:guava:31.0.1-jre")
 	implementation "com.sk89q.worldedit:worldedit-core:7.3.0-SNAPSHOT"
 	implementation("org.spongepowered:configurate-yaml:4.1.1");
 }
