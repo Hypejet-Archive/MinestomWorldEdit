@@ -52,17 +52,17 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
     @NotNull
     public Short setBlockState(@NotNull Chunk chunk, @NotNull Vec position, Short state) {
+        int sectionY = ChunkUtils.getChunkCoordinate(position.blockY());
+        if (sectionY < chunk.getMinSection() || sectionY > chunk.getMaxSection()) {
+            return 0;
+        }
+
         if (useBlockBatch) {
             if (currentBlockBatch == null) currentBlockBatch = new AbsoluteBlockBatch();
             currentBlockBatch.setBlock(position, Block.fromStateId(state));
         } else {
             // Cannot place block in a read-only chunk
             if (chunk.isReadOnly()) {
-                return 0;
-            }
-
-            int sectionY = ChunkUtils.getChunkCoordinate(position.blockY());
-            if (sectionY < chunk.getMinSection() || sectionY > chunk.getMaxSection()) {
                 return 0;
             }
 

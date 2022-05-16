@@ -104,7 +104,7 @@ public final class MinestomAdapter {
 
     @NotNull
     public BaseItemStack asBaseItemStack(@NotNull ItemStack item) throws IOException {
-        return new BaseItemStack(ItemType.REGISTRY.get(item.getMaterial().name()), item.getAmount());
+        return new BaseItemStack(ItemType.REGISTRY.get(item.material().name()), item.amount());
     }
 
     @NotNull
