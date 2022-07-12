@@ -57,7 +57,7 @@ spec:
                 withCredentials([string(credentialsId: 'maven-password', variable: 'MAVEN_PASSWORD')]) {
                     sh 'chmod +x gradlew'
                     sh './gradlew -PbyteandbitUsername=$MAVEN_USERNAME -PbyteandbitPassword=$MAVEN_PASSWORD clean build'
-                    sh 'cp build/libs/MinestomWorldEdit.jar /shared/WorldEdit-b${BUILD_NUMBER}.jar'
+                    sh 'cp build/libs/MinestomWorldEdit-all.jar /shared/WorldEdit-b${BUILD_NUMBER}.jar'
                 }
               }
             }
