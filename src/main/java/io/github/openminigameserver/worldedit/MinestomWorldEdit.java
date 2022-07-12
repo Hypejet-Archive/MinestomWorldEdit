@@ -58,7 +58,7 @@ public class MinestomWorldEdit extends Extension {
     public LoadStatus initialize() {
         INSTANCE = this;
 
-        dataFolder = getDataFolder();
+        dataFolder = new File("server/extensions/WorldEdit");
         dataFolder.mkdirs();
 
         MinestomAdapter.platform = new MinestomPlatform(this);
