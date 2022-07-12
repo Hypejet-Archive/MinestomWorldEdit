@@ -31,12 +31,24 @@ repositories {
 		url = uri("https://mvn.intellectualsites.com/content/repositories/releases/")
 	}
 	maven { url = "https://maven.enginehub.org/repo/" }
+
+	maven { url 'https://nexus.byteandbit.cloud/repository/maven-releases/' }
+	maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
+	maven {
+		name = "byteandbit"
+		url = uri("https://nexus.byteandbit.cloud/repository/maven-private/")
+		credentials(PasswordCredentials)
+		authentication {
+			basic(BasicAuthentication)
+		}
+	}
 }
 
 dependencies {
-	compileOnly('com.github.Minestom:Minestom:-SNAPSHOT')
+	compileOnly('net.minestom.server:Minestom:b43')
+	compileOnly("net.pixelravens:PixelLib:b114")
 	implementation("com.google.guava:guava:31.0.1-jre")
-	implementation "com.sk89q.worldedit:worldedit-core:7.3.0-SNAPSHOT"
+	implementation("com.sk89q.worldedit:worldedit-core:7.3.0-SNAPSHOT")
 	implementation("org.spongepowered:configurate-yaml:4.1.1");
 }
 
@@ -45,4 +57,11 @@ shadowJar {
 
 build.dependsOn shadowJar
 
+compileJava.options.encoding = 'UTF-8'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
 

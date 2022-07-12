@@ -5,3 +5,5 @@ build
 DataGeneration
 extensions
 run/**
+
+gradle.properties

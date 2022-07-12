@@ -6,7 +6,6 @@ import com.sk89q.worldedit.*;
 import com.sk89q.worldedit.event.platform.PlatformReadyEvent;
 import com.sk89q.worldedit.event.platform.PlatformsRegisteredEvent;
 import com.sk89q.worldedit.function.RegionFunction;
-import com.sk89q.worldedit.function.block.BlockReplace;
 import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.function.visitor.RegionVisitor;
 import com.sk89q.worldedit.internal.block.BlockStateIdAccess;
@@ -24,7 +23,6 @@ import com.sk89q.worldedit.world.item.ItemType;
 import io.github.openminigameserver.worldedit.platform.MinestomPlatform;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomAdapter;
 import io.github.openminigameserver.worldedit.platform.config.WorldEditConfiguration;
-import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.entity.Player;
 import net.minestom.server.extensions.Extension;
@@ -57,10 +55,10 @@ public class MinestomWorldEdit extends Extension {
     }
 
     @Override
-    public void initialize() {
+    public LoadStatus initialize() {
         INSTANCE = this;
 
-        dataFolder = new File(MinecraftServer.getExtensionManager().getExtensionFolder(), "WorldEdit");
+        dataFolder = getDataFolder();
         dataFolder.mkdirs();
 
         MinestomAdapter.platform = new MinestomPlatform(this);
@@ -72,14 +70,10 @@ public class MinestomWorldEdit extends Extension {
 
         registerBlocks();
         registerItems();
+
+        return LoadStatus.SUCCESS;
     }
 
-    /*public static void registerCustomState(String id, int stateId) {
-        BlockType type = new BlockType(id);
-        for (BlockState state : type.getAllStates()) {
-            BlockStateIdAccess.register(state, stateId);
-        }
-    }*/
 
     public static void applyBatch(Player player, Map<Vec, Short> blocks) {
         com.sk89q.worldedit.entity.Player wePlayer = MinestomAdapter.platform.getPlayer(player);
@@ -121,7 +115,7 @@ public class MinestomWorldEdit extends Extension {
                 Region region = session.getSelection();
 
                 RegionFunction set = position -> {
-                    short oldBlockId = (short)BlockStateIdAccess.getBlockStateId(editSession.getBlock(position));
+                    short oldBlockId = (short) BlockStateIdAccess.getBlockStateId(editSession.getBlock(position));
                     short blockId = blocks.apply(oldBlockId);
 
                     if (blockId != oldBlockId) {
@@ -138,7 +132,7 @@ public class MinestomWorldEdit extends Extension {
                 } else {
                     wePlayer.printInfo(TranslatableComponent.of("worldedit.set.done.verbose", TextUtils.join(messages, TextComponent.of(", "))));
                 }
-            } catch(IncompleteRegionException e) {
+            } catch (IncompleteRegionException e) {
                 wePlayer.printError(TranslatableComponent.of("worldedit.error.incomplete-region"));
             } finally {
                 session.remember(editSession);
@@ -166,14 +160,14 @@ public class MinestomWorldEdit extends Extension {
     }
 
     private void registerBlocks() {
-        for(Block minestomBlock : Block.values()) {
+        for (Block minestomBlock : Block.values()) {
             String id = minestomBlock.name();
             if (!BlockType.REGISTRY.keySet().contains(id)) {
                 BlockType block = new BlockType(id, null);
 
-                for(BlockState state : block.getAllStates()) {
+                for (BlockState state : block.getAllStates()) {
                     SortedMap<String, String> stateMap = new TreeMap<>();
-                    for(Map.Entry<Property<?>, Object> entry : state.getStates().entrySet()) {
+                    for (Map.Entry<Property<?>, Object> entry : state.getStates().entrySet()) {
                         stateMap.put(entry.getKey().getName(), entry.getValue().toString());
                     }
                     /*String[] stateStrings = new String[stateMap.size()];
