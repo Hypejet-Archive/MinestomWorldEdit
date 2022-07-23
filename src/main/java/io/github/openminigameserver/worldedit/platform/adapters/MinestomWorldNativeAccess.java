@@ -1,8 +1,8 @@
 package io.github.openminigameserver.worldedit.platform.adapters;
 
+import com.sk89q.jnbt.CompoundTag;
 import com.sk89q.worldedit.internal.block.BlockStateIdAccess;
 import com.sk89q.worldedit.internal.wna.WorldNativeAccess;
-import com.sk89q.worldedit.util.nbt.CompoundBinaryTag;
 import com.sk89q.worldedit.world.block.BlockState;
 import net.minestom.server.coordinate.Vec;
 import net.minestom.server.instance.Chunk;
@@ -37,7 +37,7 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
     @NotNull
     public Short toNative(@NotNull BlockState state) {
-        return (short)BlockStateIdAccess.getBlockStateId(state);
+        return (short) BlockStateIdAccess.getBlockStateId(state);
     }
 
     @NotNull
@@ -87,7 +87,7 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
     public void updateLightingForBlock(@Nullable Vec position) {
     }
 
-    public boolean updateTileEntity(@Nullable Vec position, @Nullable CompoundBinaryTag tag) {
+    public boolean updateTileEntity(@Nullable Vec position, @Nullable CompoundTag tag) {
         return false;
     }
 
@@ -118,7 +118,8 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
     public void flush() {
         if (this.currentBlockBatch != null) {
-            this.currentBlockBatch.apply(worldRef.get(), () -> {});
+            this.currentBlockBatch.apply(worldRef.get(), () -> {
+            });
             this.currentBlockBatch = null;
         }
     }
