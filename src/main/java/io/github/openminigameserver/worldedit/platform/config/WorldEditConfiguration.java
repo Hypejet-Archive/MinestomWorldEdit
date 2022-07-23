@@ -1,29 +1,20 @@
 package io.github.openminigameserver.worldedit.platform.config;
 
 import com.sk89q.worldedit.LocalConfiguration;
-import com.sk89q.worldedit.LocalSession;
-import com.sk89q.worldedit.session.SessionManager;
-import com.sk89q.worldedit.util.report.Unreported;
-import com.sk89q.worldedit.world.registry.LegacyMapper;
-import io.github.openminigameserver.worldedit.MinestomWorldEdit;
 
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.ConfigurationOptions;
-import org.spongepowered.configurate.loader.ConfigurationLoader;
-import org.spongepowered.configurate.serialize.SerializationException;
+import java.nio.file.Paths;
 
 public class WorldEditConfiguration extends LocalConfiguration {
     @Override
     public void load() {
     }
+
+    @Override
+    public Path getWorkingDirectoryPath() {
+        return Paths.get("server/extensions/WorldEdit");
+    }
+
     /*@Unreported
     @Nullable
     private CommentedConfigurationNode node;
