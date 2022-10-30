@@ -55,7 +55,7 @@ public class MinestomWorldEdit extends Extension {
     }
 
     @Override
-    public LoadStatus initialize() {
+    public void initialize() {
         INSTANCE = this;
 
         dataFolder = new File("server/extensions/WorldEdit");
