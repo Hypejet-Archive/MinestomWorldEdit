@@ -32,24 +32,24 @@ repositories {
 	}
 	maven { url = "https://maven.enginehub.org/repo/" }
 
-	maven { url 'https://nexus.byteandbit.cloud/repository/maven-releases/' }
+	//maven { url 'https://nexus.byteandbit.cloud/repository/maven-releases/' }
 	maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
-	maven {
+	/*maven {
 		name = "byteandbit"
 		url = uri("https://nexus.byteandbit.cloud/repository/maven-private/")
 		credentials(PasswordCredentials)
 		authentication {
 			basic(BasicAuthentication)
 		}
-	}
+	}*/
 }
 
 dependencies {
-	compileOnly('net.minestom.server:Minestom:b43')
-	compileOnly("net.pixelravens:PixelLib:b114")
-	implementation("com.google.guava:guava:31.0.1-jre")
+	compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
+	//compileOnly("net.pixelravens:PixelLib:b114")
+	implementation('com.google.guava:guava:31.1-jre')
 	implementation("com.sk89q.worldedit:worldedit-core:7.2.9")
-	implementation("org.spongepowered:configurate-yaml:4.1.1");
+	implementation('org.spongepowered:configurate-yaml:4.1.2');
 }
 
 shadowJar {

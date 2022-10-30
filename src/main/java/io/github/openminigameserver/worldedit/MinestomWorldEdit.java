@@ -58,7 +58,7 @@ public class MinestomWorldEdit extends Extension {
     public void initialize() {
         INSTANCE = this;
 
-        dataFolder = new File("server/extensions/WorldEdit");
+        dataFolder = new File("config/extensions/WorldEdit");
         dataFolder.mkdirs();
 
         MinestomAdapter.platform = new MinestomPlatform(this);
@@ -70,8 +70,6 @@ public class MinestomWorldEdit extends Extension {
 
         registerBlocks();
         registerItems();
-
-        return LoadStatus.SUCCESS;
     }
 
 

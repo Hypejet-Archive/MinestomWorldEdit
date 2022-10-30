@@ -2,7 +2,7 @@ package io.github.openminigameserver.worldedit.platform.adapters;
 
 import net.minestom.server.entity.Player;
 import net.minestom.server.permission.PermissionHandler;
-import net.pixelravens.pixellib.permissions.PermissionManager;
+//import net.pixelravens.pixellib.permissions.PermissionManager;
 
 import java.util.function.BiPredicate;
 
@@ -15,7 +15,7 @@ public class MinestomPermissionProvider {
     }
 
     public static boolean hasPermission(Player player, String permission) {
-        return PermissionManager.hasPermission(player.getUuid(), permission);
+        return permissionHandler.test(player, permission);
     }
 
 }
