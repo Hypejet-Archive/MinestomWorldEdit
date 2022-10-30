@@ -2,7 +2,8 @@
   "name": "WorldEdit",
   "authors": [
     "NickAc",
-    "Moulberry"
+    "Moulberry",
+    "Window5"
   ],
   "version": "1.0.0",
   "entrypoint": "io.github.openminigameserver.worldedit.MinestomWorldEdit"
