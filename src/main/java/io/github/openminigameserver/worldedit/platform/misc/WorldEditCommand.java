@@ -21,6 +21,8 @@ public class WorldEditCommand extends Command {
     public WorldEditCommand(org.enginehub.piston.Command command) {
         super(command.getName(), toPrimitiveArray(command.getAliases()));
 
+        setCondition(this::condition);
+
         ArgumentStringArray argument = ArgumentType.StringArray("args");
         argument.setSuggestionCallback((sender, context, suggestion) -> {
             CommandSuggestionEvent event = new CommandSuggestionEvent(MinestomAdapter.INSTANCE.asActor(sender), "/"+context.getInput());
@@ -38,6 +40,10 @@ public class WorldEditCommand extends Command {
         });
 
         addSyntax((sender, cmd) -> {}, argument);
+    }
+
+    private boolean condition(final CommandSender sender, final String command) {
+        return sender.hasPermission("worldedit");
     }
 
     @Override
