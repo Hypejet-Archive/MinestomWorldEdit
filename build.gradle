@@ -22,7 +22,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 compileJava   {
-	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_18
 }
 
 repositories {
@@ -47,6 +47,16 @@ repositories {
 		}
 	}*/
 }
+
+
+
+def jarFile = layout.buildDirectory.file('build/libs/WorldEdit.jar')
+def jarArtifact = artifacts.add('archives', jarFile.get().asFile) {
+    type 'jar'
+    builtBy 'jar'
+}
+
+
 
 dependencies {
 	compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
@@ -82,7 +92,7 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            from(components.java)
+            artifact jarArtifact
         }
     }
 }
