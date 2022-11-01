@@ -13,6 +13,10 @@ buildscript {
 	}
 }
 
+plugins {
+    id("maven-publish")
+}
+
 apply plugin: 'java-library'
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
