@@ -15,7 +15,7 @@ public class MinestomPermissionProvider {
     }
 
     public static boolean hasPermission(Player player, String permission) {
-        return permissionHandler.test(player, permission);
+        return player.hasPermission(permission);
     }
 
 }
