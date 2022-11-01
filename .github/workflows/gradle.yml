@@ -37,12 +37,7 @@ jobs:
       with:
         name: Fat Jar
         path: build/libs/*-all.jar
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3.0.1
+    - name: Publish
+      uses: gradle/gradle-build-action@5df685c7b2fe49fac8decf5228a23ac8f8dcd123
       with:
-        # Artifact name
-        name: Fat Jar
-        # Destination path
-        path: build/libs/build.jar
-    - name: ls
-      run: ls -R
+        arguments: publish
