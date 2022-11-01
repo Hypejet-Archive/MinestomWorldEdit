@@ -48,7 +48,7 @@ dependencies {
 	compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
 	//compileOnly("net.pixelravens:PixelLib:b114")
 	implementation('com.google.guava:guava:31.1-jre')
-	implementation("com.sk89q.worldedit:worldedit-core:7.2.9")
+	implementation("com.sk89q.worldedit:worldedit-core:7.2.12")
 	implementation('org.spongepowered:configurate-yaml:4.1.2');
 }
 
