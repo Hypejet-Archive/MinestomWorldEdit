@@ -50,7 +50,7 @@ repositories {
 
 
 
-def jarFile = layout.buildDirectory.file('build/libs/WorldEdit.jar')
+def jarFile = layout.buildDirectory.file('build/libs/World-Edit-all.jar')
 def jarArtifact = artifacts.add('archives', jarFile.get().asFile) {
     type 'jar'
     builtBy 'jar'
