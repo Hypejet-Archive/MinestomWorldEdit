@@ -42,3 +42,5 @@ jobs:
       uses: gradle/gradle-build-action@5df685c7b2fe49fac8decf5228a23ac8f8dcd123
       with:
         arguments: publish
+      env:
+        TOKEN: ${{ secrets.TOKEN }}
