@@ -85,7 +85,7 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/MinestomPlugins/World-Edit")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                username = "Window5000"
                 password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
