@@ -1,4 +1,4 @@
-// MinestomPlayer.java
+
 package io.github.openminigameserver.worldedit.platform.actors;
 
 import com.sk89q.util.StringUtil;
@@ -161,7 +161,7 @@ public final class MinestomPlayer extends AbstractPlayerActor {
         return null;
     }
 
-    private final void sendColorized(String msg, TextColor formatting) {
+    private void sendColorized(String msg, TextColor formatting) {
         for(String line : msg.split("\n")) {
             print(TextComponent.of(line, formatting));
         }

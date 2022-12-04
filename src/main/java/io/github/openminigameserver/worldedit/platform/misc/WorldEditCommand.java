@@ -17,11 +17,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class WorldEditCommand extends Command {
-
     public WorldEditCommand(org.enginehub.piston.Command command) {
         super(command.getName(), toPrimitiveArray(command.getAliases()));
 
-        setCondition(this::condition);
+        setCondition((this::condition));
 
         ArgumentStringArray argument = ArgumentType.StringArray("args");
         argument.setSuggestionCallback((sender, context, suggestion) -> {
@@ -43,7 +42,8 @@ public class WorldEditCommand extends Command {
     }
 
     private boolean condition(final CommandSender sender, final String command) {
-        return sender.hasPermission("worldedit");
+        //TODO: Permission Check
+        return true;
     }
 
     @Override

@@ -37,9 +37,6 @@ public final class MinestomConsole extends AbstractNonPlayerActor {
     public void checkPermission(@Nullable String permission) {
     }
 
-    public void setPermission(String permission, boolean value) {
-    }
-
     public boolean hasPermission(@Nullable String permission) {
         return true;
     }
@@ -67,7 +64,7 @@ public final class MinestomConsole extends AbstractNonPlayerActor {
     }
 
     @NotNull
-    public final Gson getGson() {
+    public Gson getGson() {
         return gson;
     }
 
@@ -92,8 +89,5 @@ public final class MinestomConsole extends AbstractNonPlayerActor {
     @NotNull
     public Locale getLocale() {
         return Locale.getDefault();
-    }
-
-    private MinestomConsole() {
     }
 }

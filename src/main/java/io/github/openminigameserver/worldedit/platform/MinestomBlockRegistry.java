@@ -52,7 +52,7 @@ public final class MinestomBlockRegistry extends BundledBlockRegistry {
     }
 
     public static class MinestomBlockMaterial extends PassthroughBlockMaterial {
-        private Block minestomBlock;
+        private final Block minestomBlock;
 
         public MinestomBlockMaterial(@Nullable BlockMaterial material, Block block) {
             super(material);

@@ -15,13 +15,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 
 public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk, Short, Vec> {
     private final WeakReference<Instance> worldRef;
     private AbsoluteBlockBatch currentBlockBatch;
     private final boolean useBlockBatch;
 
-    private final Instance getWorld() {
+    private Instance getWorld() {
         Instance instance = this.worldRef.get();
         if (instance != null) {
             return instance;
@@ -59,7 +60,7 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
         if (useBlockBatch) {
             if (currentBlockBatch == null) currentBlockBatch = new AbsoluteBlockBatch();
-            currentBlockBatch.setBlock(position, Block.fromStateId(state));
+            currentBlockBatch.setBlock(position, Objects.requireNonNull(Block.fromStateId(state)));
         } else {
             // Cannot place block in a read-only chunk
             if (chunk.isReadOnly()) {
@@ -67,7 +68,7 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
             }
 
             // Set the block
-            chunk.setBlock(position.blockX(), position.blockY(), position.blockZ(), Block.fromStateId(state));
+            chunk.setBlock(position.blockX(), position.blockY(), position.blockZ(), Objects.requireNonNull(Block.fromStateId(state)));
             chunk.sendPacketToViewers(new BlockChangePacket(position, state));
         }
 
@@ -91,17 +92,11 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
         return false;
     }
 
-    public void notifyBlockUpdate(@Nullable Vec position, @Nullable Short oldState, @Nullable Short newState) {
-    }
-
     public void notifyBlockUpdate(Chunk chunk, @Nullable Vec position, @Nullable Short oldState, @Nullable Short newState) {
     }
 
     public boolean isChunkTicking(@Nullable Chunk chunk) {
         return chunk != null;
-    }
-
-    public void markBlockChanged(@Nullable Vec position) {
     }
 
     public void markBlockChanged(Chunk chunk, @Nullable Vec position) {
@@ -118,17 +113,13 @@ public final class MinestomWorldNativeAccess implements WorldNativeAccess<Chunk,
 
     public void flush() {
         if (this.currentBlockBatch != null) {
-            this.currentBlockBatch.apply(worldRef.get(), () -> {
+            this.currentBlockBatch.apply(Objects.requireNonNull(worldRef.get()), () -> {
             });
             this.currentBlockBatch = null;
         }
     }
 
-    public final boolean getUseBlockBatch() {
-        return this.useBlockBatch;
-    }
-
-    public MinestomWorldNativeAccess(@NotNull WeakReference worldRef, boolean useBlockBatch) {
+    public MinestomWorldNativeAccess(@NotNull WeakReference<Instance> worldRef, boolean useBlockBatch) {
         this.worldRef = worldRef;
         this.useBlockBatch = useBlockBatch;
         this.currentBlockBatch = null;

@@ -15,9 +15,7 @@ import net.minestom.server.event.player.*;
 public class WorldEditListener {
 
     public static void register(EventNode<Event> eventNode, MinestomPlatform platform, WorldEdit worldEdit) {
-        eventNode.addListener(PlayerDisconnectEvent.class, (event) -> {
-            platform.removePlayer(event.getPlayer().getUuid());
-        });
+        eventNode.addListener(PlayerDisconnectEvent.class, (event) -> platform.removePlayer(event.getPlayer().getUuid()));
 
         eventNode.addListener(PlayerPluginMessageEvent.class, (event) -> {
             if (event.getIdentifier().equals("worldedit:cui")) {

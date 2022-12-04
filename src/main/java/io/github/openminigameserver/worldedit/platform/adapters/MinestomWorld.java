@@ -16,7 +16,6 @@ import com.sk89q.worldedit.util.SideEffect;
 import com.sk89q.worldedit.util.SideEffectSet;
 import com.sk89q.worldedit.util.TreeGenerator.TreeType;
 import com.sk89q.worldedit.world.AbstractWorld;
-import com.sk89q.worldedit.world.WorldUnloadedException;
 import com.sk89q.worldedit.world.block.BaseBlock;
 import com.sk89q.worldedit.world.block.BlockState;
 import com.sk89q.worldedit.world.block.BlockStateHolder;
@@ -51,17 +50,7 @@ public final class MinestomWorld extends AbstractWorld {
     }
 
     @NotNull
-    public Instance getWorldChecked() throws WorldEditException {
-        Instance world = this.worldRef.get();
-        if (world != null) {
-            return world;
-        } else {
-            throw new WorldUnloadedException();
-        }
-    }
-
-    @NotNull
-    public final Instance getWorld() {
+    public Instance getWorld() {
         Instance world = this.worldRef.get();
         if (world != null) {
             return world;
@@ -183,7 +172,7 @@ public final class MinestomWorld extends AbstractWorld {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         MinestomWorld that = (MinestomWorld) o;
-        return this.worldRef.get().equals(that.worldRef.get());
+        return Objects.equals(this.worldRef.get(), that.worldRef.get());
     }
 
     @Override
