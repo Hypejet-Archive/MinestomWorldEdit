@@ -8,5 +8,15 @@
     "CityWideMC"
   ],
   "version": "1.0.0",
-  "entrypoint": "io.github.openminigameserver.worldedit.MinestomWorldEdit"
+  "entrypoint": "io.github.openminigameserver.worldedit.MinestomWorldEdit",
+  "externalDependencies": {
+    "repositories": [
+      {"name": "sponge", "url": "https://repo.spongepowered.org/repository/maven-public/" },
+      {"name": "enginehub", "url": "https://maven.enginehub.org/repo/" }
+    ],
+    "artifacts": [
+      "com.sk89q.worldedit:worldedit-core:7.2.12",
+      "org.spongepowered:configurate-yaml:4.1.2"
+    ]
+  }
 }

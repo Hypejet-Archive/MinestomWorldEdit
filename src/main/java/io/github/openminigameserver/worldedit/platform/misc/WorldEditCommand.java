@@ -13,6 +13,7 @@ import net.minestom.server.command.builder.arguments.ArgumentType;
 import net.minestom.server.command.builder.suggestion.SuggestionEntry;
 import net.minestom.server.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import io.github.openminigameserver.worldedit.platform.adapters.MinestomPermissionProvider;
 
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class WorldEditCommand extends Command {
 
             List<String> suggests = CommandUtil.fixSuggestions("/"+context.getInput(), event.getSuggestions());
             for(String suggest : suggests) {
-                suggestion.addEntry(new SuggestionEntry(suggest));
+                if(MinestomPermissionProvider.hasPermission((Player) sender, "worldedit." + suggest))
+                    suggestion.addEntry(new SuggestionEntry(suggest));
             }
         });
 

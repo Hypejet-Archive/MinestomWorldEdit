@@ -9,4 +9,8 @@ public class MinestomPermissionProvider {
         return player.hasPermission(permission);
     }
 
+    public static boolean hasWorldEditPermission(Player player) {
+        return player.hasPermission("*") || player.hasPermission("worldedit");
+    }
+
 }
