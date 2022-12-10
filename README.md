@@ -1,4 +1,5 @@
 # MinestomWorldEdit
 WorldEdit Platform implementation for Minestom server software
 
-Get the artifact from the latest actions workflow
+## Known issues:
+The permission for //wand does not work, i have no idea why.
