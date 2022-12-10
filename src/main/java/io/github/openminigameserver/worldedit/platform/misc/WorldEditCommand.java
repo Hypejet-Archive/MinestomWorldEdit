@@ -3,22 +3,37 @@ package io.github.openminigameserver.worldedit.platform.misc;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.event.platform.CommandEvent;
 import com.sk89q.worldedit.event.platform.CommandSuggestionEvent;
+import com.sk89q.worldedit.extension.platform.Actor;
 import com.sk89q.worldedit.internal.command.CommandUtil;
+import io.github.openminigameserver.worldedit.MinestomWorldEdit;
+import io.github.openminigameserver.worldedit.platform.MinestomPlatform;
+import io.github.openminigameserver.worldedit.platform.actors.MinestomPlayer;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomAdapter;
+import net.kyori.adventure.text.Component;
+import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.CommandSender;
+import net.minestom.server.command.ConsoleSender;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.command.builder.CommandContext;
 import net.minestom.server.command.builder.arguments.ArgumentStringArray;
 import net.minestom.server.command.builder.arguments.ArgumentType;
 import net.minestom.server.command.builder.suggestion.SuggestionEntry;
 import net.minestom.server.entity.Player;
+import org.enginehub.piston.inject.InjectedValueStore;
+import org.enginehub.piston.inject.Key;
+import org.enginehub.piston.inject.MapBackedValueStore;
 import org.jetbrains.annotations.NotNull;
+import io.github.openminigameserver.worldedit.platform.adapters.MinestomPermissionProvider;
 
 import java.util.List;
+import java.util.Optional;
 
 public class WorldEditCommand extends Command {
+
+    org.enginehub.piston.Command cmd;
     public WorldEditCommand(org.enginehub.piston.Command command) {
         super(command.getName(), toPrimitiveArray(command.getAliases()));
+        cmd = command;
 
         setCondition((this::condition));
 
@@ -42,8 +57,11 @@ public class WorldEditCommand extends Command {
     }
 
     private boolean condition(final CommandSender sender, final String command) {
-        //TODO: Permission Check
-        return true;
+        if(sender instanceof ConsoleSender) return true;
+        InjectedValueStore store = MapBackedValueStore.create();
+        store.injectValue(Key.of(Actor.class), context ->
+                Optional.of(new MinestomPlayer(MinestomAdapter.platform, (Player) sender)));
+        return cmd.getCondition().satisfied(store);
     }
 
     @Override
