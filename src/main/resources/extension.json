@@ -4,6 +4,7 @@
     "NickAc",
     "Moulberry",
     "Window5",
+    "MinestomPlugins",
     "HEROOSTECH",
     "CityWideMC"
   ],
@@ -15,8 +16,8 @@
       {"name": "enginehub", "url": "https://maven.enginehub.org/repo/" }
     ],
     "artifacts": [
-      "com.sk89q.worldedit:worldedit-core:7.2.12",
-      "org.spongepowered:configurate-yaml:4.1.2"
+      "org.spongepowered:configurate-yaml:4.1.2",
+      "com.sk89q.worldedit:worldedit-core:7.2.12"
     ]
   }
 }
