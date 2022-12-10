@@ -30,7 +30,7 @@ jobs:
         java-version: '18'
         distribution: 'zulu'
     - name: Build Jar
-      uses: gradle/gradle-build-action@5df685c7b2fe49fac8decf5228a23ac8f8dcd123
+      uses: gradle/gradle-build-action@cfc50b189af149aeb55f94103f47753382d88d33
       with:
         arguments: shadowJar
     - name: Upload Jar
@@ -39,7 +39,7 @@ jobs:
         name: Fat Jar
         path: build/libs/*-all.jar
     - name: Publish
-      uses: gradle/gradle-build-action@5df685c7b2fe49fac8decf5228a23ac8f8dcd123
+      uses: gradle/gradle-build-action@cfc50b189af149aeb55f94103f47753382d88d33
       with:
         arguments: publish
       env:
