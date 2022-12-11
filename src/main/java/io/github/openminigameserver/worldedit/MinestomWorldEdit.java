@@ -10,6 +10,7 @@ import com.sk89q.worldedit.world.block.BlockType;
 import com.sk89q.worldedit.world.item.ItemType;
 import io.github.openminigameserver.worldedit.platform.MinestomPlatform;
 import io.github.openminigameserver.worldedit.platform.adapters.MinestomAdapter;
+import io.github.openminigameserver.worldedit.platform.adapters.MinestomPermissionProvider;
 import io.github.openminigameserver.worldedit.platform.config.WorldEditConfiguration;
 import net.minestom.server.extensions.Extension;
 import net.minestom.server.instance.block.Block;
@@ -49,6 +50,7 @@ public class MinestomWorldEdit extends Extension {
 
         registerBlocks();
         registerItems();
+        MinestomPermissionProvider.init();
     }
 
     private void loadConfig() {

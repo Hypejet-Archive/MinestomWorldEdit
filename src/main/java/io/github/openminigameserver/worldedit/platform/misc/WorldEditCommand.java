@@ -61,7 +61,7 @@ public class WorldEditCommand extends Command {
         InjectedValueStore store = MapBackedValueStore.create();
         store.injectValue(Key.of(Actor.class), context ->
                 Optional.of(new MinestomPlayer(MinestomAdapter.platform, (Player) sender)));
-        return cmd.getCondition().satisfied(store);
+        return cmd.getCondition().satisfied(store) && MinestomPermissionProvider.hasWorldEditPermission((Player) sender);
     }
 
     @Override
