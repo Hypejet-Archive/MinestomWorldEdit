@@ -1,16 +1,21 @@
 package io.github.openminigameserver.worldedit.platform.adapters;
 
+import me.window.permissions.PermissionProvider;
 import net.minestom.server.entity.Player;
 
 public class MinestomPermissionProvider {
+
+    public static PermissionProvider provider;
+
+    public static void init() {
+        provider = new PermissionProvider(4, "worldedit");
+    }
     public static boolean hasPermission(Player player, String permission) {
-        if (player.hasPermission("*") || player.hasPermission("worldedit.*") || player.getPermissionLevel() >= 4)
-            return true;
-        return player.hasPermission(permission);
+        return provider.hasExtensionPermission(player, permission);
     }
 
     public static boolean hasWorldEditPermission(Player player) {
-        return player.hasPermission("*") || player.hasPermission("worldedit") || player.getPermissionLevel() >= 4;
+        return provider.hasExtensionPermission(player);
     }
 
 }

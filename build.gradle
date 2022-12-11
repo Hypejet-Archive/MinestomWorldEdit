@@ -36,6 +36,7 @@ repositories {
 	}
 	maven { url = "https://maven.enginehub.org/repo/" }
 
+
 	//maven { url 'https://nexus.byteandbit.cloud/repository/maven-releases/' }
 	maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
 	/*maven {
@@ -61,9 +62,10 @@ def jarArtifact = artifacts.add('archives', jarFile.get().asFile) {
 dependencies {
 	compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
 	//compileOnly("net.pixelravens:PixelLib:b114")
-	implementation('com.google.guava:guava:31.1-jre')
+	compileOnly('com.google.guava:guava:31.1-jre')
 	compileOnly("com.sk89q.worldedit:worldedit-core:7.2.12")
 	compileOnly('org.spongepowered:configurate-yaml:4.1.2');
+	compileOnly 'com.github.MinestomPlugins:lib-permissions:5a9310e71f'
 }
 
 shadowJar {

@@ -13,11 +13,15 @@
   "externalDependencies": {
     "repositories": [
       {"name": "sponge", "url": "https://repo.spongepowered.org/repository/maven-public/" },
-      {"name": "enginehub", "url": "https://maven.enginehub.org/repo/" }
+      {"name": "enginehub", "url": "https://maven.enginehub.org/repo/" },
+      {"name": "jitpack", "url": "https://jitpack.io" },
+      {"name": "Central", "url": "https://repo1.maven.org/maven2/"}
     ],
     "artifacts": [
       "org.spongepowered:configurate-yaml:4.1.2",
-      "com.sk89q.worldedit:worldedit-core:7.2.12"
+      "com.sk89q.worldedit:worldedit-core:7.2.12",
+      "com.github.MinestomPlugins:lib-permissions:5a9310e71f",
+      "com.google.guava:guava:31.1-jre"
     ]
   }
 }
