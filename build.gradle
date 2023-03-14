@@ -22,18 +22,13 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 compileJava   {
-	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_18
+	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spongepowered.org/maven' }
-	maven { url 'https://repo.velocitypowered.com/snapshots/' }
 	maven { url 'https://jitpack.io' }
-	maven {
-		name = "IntellectualSites Releases"
-		url = uri("https://mvn.intellectualsites.com/content/repositories/releases/")
-	}
 	maven { url = "https://maven.enginehub.org/repo/" }
 
 
@@ -51,7 +46,7 @@ repositories {
 
 
 
-def jarFile = layout.buildDirectory.file('libs/World-Edit-all.jar')
+def jarFile = layout.buildDirectory.file('libs/World-Edit.jar')
 def jarArtifact = artifacts.add('archives', jarFile.get().asFile) {
     type 'jar'
     builtBy 'jar'
@@ -60,12 +55,12 @@ def jarArtifact = artifacts.add('archives', jarFile.get().asFile) {
 
 
 dependencies {
-	compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
+	compileOnly 'com.github.Minestom:Minestom:3ca74e00fa'
 	//compileOnly("net.pixelravens:PixelLib:b114")
 	compileOnly('com.google.guava:guava:31.1-jre')
 	compileOnly("com.sk89q.worldedit:worldedit-core:7.2.12")
 	compileOnly('org.spongepowered:configurate-yaml:4.1.2');
-	compileOnly 'com.github.MinestomPlugins:lib-permissions:5a9310e71f'
+	compileOnly 'com.github.HypeJet:HypeStom-Kt:7f6eaccd14'
 }
 
 shadowJar {
@@ -77,6 +72,6 @@ compileJava.options.encoding = 'UTF-8'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(18)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }

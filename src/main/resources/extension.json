@@ -6,7 +6,7 @@
     "Window5",
     "MinestomPlugins",
     "HEROOSTECH",
-    "CityWideMC"
+    "HypeJet"
   ],
   "version": "1.0.0",
   "entrypoint": "io.github.openminigameserver.worldedit.MinestomWorldEdit",
@@ -20,7 +20,7 @@
     "artifacts": [
       "org.spongepowered:configurate-yaml:4.1.2",
       "com.sk89q.worldedit:worldedit-core:7.2.12",
-      "com.github.MinestomPlugins:lib-permissions:5a9310e71f",
+      "com.github.HypeJet:HypeStom-Kt:7f6eaccd14",
       "com.google.guava:guava:31.1-jre"
     ]
   }
